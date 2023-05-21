@@ -2,8 +2,7 @@
 Blackjack Console Game with any number of players playing against a Dealer (Computer)
 
 ## Installation
-Needs Java 8 or above
-Needs mvn
+Needs Java 8 or above and mvn
 
 ## Packaging
 Run mvn clean install that will generate a exectutable jar file
