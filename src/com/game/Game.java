@@ -59,7 +59,7 @@ public class Game {
         if(deck.cardsLeft() < 4){
             deck.reloadDeckFromDiscard(discarded);
         }
-        //Give all players including dealer one card each
+        //Give all players including dealer two cards each
         dealer.getHand().takeCardFromDeck(deck);
         dealer.getHand().takeCardFromDeck(deck);
         dealer.printFirstHand();
@@ -67,7 +67,7 @@ public class Game {
         	player.getHand().takeCardFromDeck(deck);
             player.getHand().takeCardFromDeck(deck);
             player.printHand();
-            if(dealer.hasBlackjack()){
+            if(dealer.hasBlackjack()){ //If the dealer has blackjack, the game ends
                 dealer.printHand();
                 if(player.hasBlackjack()){
                     System.out.println(player.getName() + " and dealer have 21 - Push.");
@@ -88,7 +88,7 @@ public class Game {
                 player.victories++;
             }
         });
-        players.forEach(player -> {
+        players.forEach(player -> {//for each player play the game infinitely till he chooses to stand
         	if(!player.isGameOver) {
         	player.makeDecision(deck, discarded);
         	
@@ -104,14 +104,14 @@ public class Game {
             }
         	}
         });
-        boolean dealerPlayOn = players.stream().filter(player ->!player.isGameOver).findAny().isPresent();
-        if(dealerPlayOn) {//check if deals has to play or not
+        boolean dealerPlayOn = players.stream().filter(player ->!player.isGameOver).findAny().isPresent();//First check if dealer needs to continue playing
+        if(dealerPlayOn) {
 	        dealer.printHand();
-	        while(dealer.getHand().calculatedValue()< dealersStrategy.getStrategyLimit()){
+	        while(dealer.getHand().calculatedValue()< dealersStrategy.getStrategyLimit()){//Play infinitely till the it reaches the dealers stragegy limit
 	            dealer.hit(deck, discarded);
 	            dealer.printHand();
 	        }
-	        if(dealer.getHand().calculatedValue()>BJ_WIN){
+	        if(dealer.getHand().calculatedValue()>BJ_WIN){//If dealer busted all other players win
 	            System.out.println("Dealer busts");
 	            players.forEach(player -> {//since dealer busted, players win if they have not lost yet
 	            	if(!player.isGameOver) {
