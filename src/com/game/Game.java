@@ -128,17 +128,17 @@ public class Game {
 		                    System.out.println("Dealer has BlackJack." +player.getName() +" lose.");
 		                    player.isGameOver = true;
 		            }
-		            if(player.hasBlackjack()){
+		    		else if(player.hasBlackjack()){
 		                System.out.println(player.getName() + " has Blackjack! Won!");
 		                player.isGameOver = true;
 		                player.wonGame = true;
 		                player.victories++;
 		            }
-			        if(!player.isGameOver && dealer.getHand().calculatedValue() > player.getHand().calculatedValue()){
+		    		else if(dealer.getHand().calculatedValue() >= player.getHand().calculatedValue()){
 			            System.out.println(player.getName() + " lose.");
 			            player.isGameOver = true;
 			        }
-			        else if(!player.isGameOver && player.getHand().calculatedValue() > dealer.getHand().calculatedValue()){
+			        else if(player.getHand().calculatedValue() > dealer.getHand().calculatedValue()){
 			            System.out.println(player.getName() + " won.");
 			            player.isGameOver = true;
 		                player.wonGame = true;
